@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pollería V&M | Fresco de verdad. Hecho por nosotras.</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@600;700;800&family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600;1,700&family=Kaushan+Script&family=Lora:ital,wght@0,400;0,500;0,600;1,400&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --crema: #FAF0DF; --papel: #F9E8CD; --arena: #F2E2C8;
+      --bordo: #67140C; --bordo-banda: #761A12; --oliva: #3A3714;
+      --cinta: #4F4521; --rojo: #B03A22; --dorado: #826A3B;
+      --tinta: #413525; --celeste: #74ACDF;
+      --font-titulo: 'Playfair Display', Georgia, serif;
+      --font-subtitulo: 'Cormorant Garamond', Georgia, serif;
+      --font-datos: 'Barlow Semi Condensed', sans-serif;
+      --font-lectura: 'Lora', Georgia, serif;
+      --font-script: 'Kaushan Script', cursive;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--crema);
+      background-image: radial-gradient(rgba(130, 106, 59, 0.08) 1px, transparent 0);
+      background-size: 22px 22px;
+      color: var(--tinta);
+      font-family: var(--font-lectura);
+      display: flex; flex-direction: column; min-height: 100vh;
+    }
+    a { text-decoration: none; color: inherit; }
+    button { cursor: pointer; border: none; font-family: inherit; }
+    
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 15px; width: 100%; }
+    
+    .font-titulo { font-family: var(--font-titulo); }
+    .font-subtitulo { font-family: var(--font-subtitulo); }
+    .font-datos { font-family: var(--font-datos); }
+    .font-script { font-family: var(--font-script); }
+    .bg-bordo { background-color: var(--bordo); }
+    .bg-bordo-banda { background-color: var(--bordo-banda); }
+    .text-crema { color: var(--crema); }
+    .text-bordo { color: var(--bordo); }
+    .text-oliva { color: var(--oliva); }
+    .text-rojo { color: var(--rojo); }
+    .text-dorado { color: var(--dorado); }
+
+    .top-bar { background-color: var(--bordo-banda); color: var(--crema); font-family: var(--font-datos); font-size: 11px; padding: 8px 10px; border-bottom: 1px solid rgba(130,106,59,0.4); text-align: center; }
+    .top-bar .container { display: flex; flex-direction: column; align-items: center; gap: 4px; }
+    @media(min-width: 768px) { 
+      .top-bar .container { flex-direction: row; justify-content: space-between; font-size: 13px; } 
+    }
+    
+    header { background-color: rgba(250, 240, 223, 0.95); border-bottom: 1px solid rgba(130,106,59,0.4); padding: 20px 15px; position: relative; }
+    .brand { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 5px; margin-top: 10px; }
+    @media(min-width: 768px) { .brand { margin-top: 0; } }
+    
+    .brand h1 { font-family: var(--font-titulo); font-size: 22px; color: var(--bordo); text-transform: uppercase; font-weight: 800; letter-spacing: 1px; line-height: 1.1; }
+    @media(min-width: 768px) { .brand h1 { font-size: 32px; } }
+    .brand h1 span { color: var(--oliva); }
+    .brand p { font-family: var(--font-subtitulo); font-style: italic; font-size: 14px; color: var(--oliva); font-weight: 600; }
+    @media(min-width: 768px) { .brand p { font-size: 18px; } }
+
+    .divider { display: flex; align-items: center; justify-content: center; gap: 10px; width: 150px; margin: 8px auto 0; }
+    @media(min-width: 768px) { .divider { width: 250px; } }
+    .divider span { height: 1px; flex: 1; background-color: rgba(130,106,59,0.6); }
+    .divider i { color: var(--rojo); font-size: 12px; font-style: normal; }
+
+    .cart-btn-container { position: absolute; top: 10px; right: 10px; z-index: 10; }
+    @media(min-width: 768px) { .cart-btn-container { top: 20px; right: 20px; } }
+    .cart-btn { background-color: var(--bordo-banda); color: var(--crema); padding: 6px 10px; border-radius: 20px; font-family: var(--font-datos); font-weight: 700; font-size: 12px; display: flex; align-items: center; gap: 5px; border: 1px solid rgba(130,106,59,0.5); transition: 0.2s; }
+    @media(min-width: 768px) { .cart-btn { padding: 8px 16px; font-size: 14px; gap: 8px; } }
+    .cart-btn:hover { opacity: 0.9; }
+    .cart-count { background-color: var(--rojo); color: var(--crema); padding: 2px 6px; border-radius: 10px; font-size: 10px; font-weight: 800; }
+
+    .filters { margin: 20px 0; display: flex; flex-direction: column; gap: 15px; }
+    @media(min-width: 768px) { .filters { flex-direction: row; align-items: center; justify-content: space-between; } }
+    .search-box { position: relative; width: 100%; max-width: 100%; }
+    @media(min-width: 768px) { .search-box { max-width: 400px; } }
+    .search-box input { width: 100%; padding: 12px 15px; border-radius: 10px; border: 1px solid rgba(130,106,59,0.6); background-color: rgba(242,226,200,0.8); font-family: var(--font-lectura); font-size: 14px; outline: none; }
+    .categories { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 5px; -webkit-overflow-scrolling: touch; }
+    .categories::-webkit-scrollbar { display: none; }
+    .cat-pill { white-space: nowrap; padding: 8px 16px; border-radius: 20px; font-family: var(--font-datos); font-size: 13px; font-weight: 700; border: 1px solid rgba(130,106,59,0.6); background-color: var(--arena); color: var(--oliva); transition: 0.2s; }
+    .cat-pill.active { background-color: var(--bordo-banda); color: var(--crema); border-color: var(--dorado); }
+
+    .section-title { text-align: center; margin: 10px 0 20px; }
+    .section-title h2 { font-family: var(--font-titulo); font-size: 20px; color: var(--bordo); text-transform: uppercase; font-weight: 800; }
+    @media(min-width: 768px) { .section-title h2 { font-size: 28px; } }
+    .section-title p { font-family: var(--font-subtitulo); font-style: italic; color: var(--oliva); font-size: 14px; }
+    
+    .grid { display: grid; grid-template-columns: 1fr; gap: 15px; padding: 10px 0 40px; }
+    @media(min-width: 600px) { .grid { grid-template-columns: repeat(2, 1fr); gap: 20px; } }
+    @media(min-width: 900px) { .grid { grid-template-columns: repeat(3, 1fr); } }
+
+    .card { background-color: var(--papel); border: 1px solid rgba(130,106,59,0.5); border-radius: 16px; overflow: hidden; display: flex; flex-direction: column; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
+    .card-img { width: 100%; height: 180px; object-fit: cover; background-color: var(--arena); }
+    @media(min-width: 768px) { .card-img { height: 220px; } }
+    .card-content { padding: 15px; display: flex; flex-direction: column; flex: 1; gap: 8px; }
+    .card-category { font-family: var(--font-datos); font-size: 10px; text-transform: uppercase; color: var(--dorado); letter-spacing: 1px; font-weight: 700; }
+    .card-title { font-family: var(--font-titulo); font-size: 16px; color: var(--bordo); font-weight: 700; line-height: 1.2; }
+    @media(min-width: 768px) { .card-title { font-size: 18px; } }
+    .card-desc { font-size: 13px; color: rgba(65,53,37,0.8); line-height: 1.4; flex: 1; }
+    .card-price { font-family: var(--font-datos); font-size: 18px; font-weight: 800; color: var(--bordo); margin-top: 5px; }
+    .card-btn { background-color: var(--bordo-banda); color: var(--crema); padding: 10px; border-radius: 10px; font-family: var(--font-datos); font-weight: 700; font-size: 14px; text-align: center; border: 1px solid rgba(130,106,59,0.5); transition: 0.2s; }
+    .card-btn:hover { opacity: 0.9; }
+    .card-btn.quote { background-color: var(--oliva); }
+
+    .cart-backdrop { position: fixed; inset: 0; background: rgba(0,0,0,0.6); z-index: 40; display: none; }
+    .cart-backdrop.show { display: block; }
+    .cart-drawer { position: fixed; top: 0; right: 0; bottom: 0; width: 100%; max-width: 100%; background-color: var(--crema); border-left: 1px solid var(--dorado); z-index: 50; transform: translateX(100%); transition: transform 0.3s ease; display: flex; flex-direction: column; }
+    @media(min-width: 768px) { .cart-drawer { max-width: 400px; } }
+    .cart-drawer.open { transform: translateX(0); }
+    .cart-header { background-color: var(--bordo-banda); color: var(--crema); padding: 15px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--dorado); }
+    .cart-header button { background: transparent; color: var(--crema); font-family: var(--font-datos); font-size: 12px; font-weight: 700; text-decoration: underline; }
+    .cart-body { padding: 15px; overflow-y: auto; flex: 1; }
+    .cart-item { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid rgba(130,106,59,0.3); }
+    .cart-item-info { flex: 1; }
+    .cart-item-title { font-family: var(--font-datos); font-size: 14px; font-weight: 700; color: var(--bordo); }
+    .cart-item-price { font-size: 12px; color: var(--oliva); }
+    .cart-item-actions { display: flex; align-items: center; gap: 8px; }
+    .cart-item-actions button { width: 28px; height: 28px; border-radius: 4px; background-color: var(--arena); border: 1px solid rgba(130,106,59,0.5); font-weight: bold; }
+    .cart-footer { padding: 15px; border-top: 1px solid var(--dorado); background-color: var(--arena); }
+    .cart-total { display: flex; justify-content: space-between; font-family: var(--font-titulo); font-weight: 700; font-size: 18px; color: var(--bordo); margin-bottom: 10px; }
+    .form-group { margin-bottom: 10px; }
+    .form-group label { display: block; font-family: var(--font-datos); font-size: 11px; font-weight: 700; color: var(--oliva); text-transform: uppercase; margin-bottom: 4px; }
+    .form-group input, .form-group select { width: 100%; padding: 10px; border-radius: 6px; border: 1px solid rgba(130,106,59,0.6); background-color: var(--arena); font-family: var(--font-lectura); font-size: 14px; }
+    .btn-wa { width: 100%; background-color: #25D366; color: white; padding: 14px; border-radius: 10px; font-family: var(--font-datos); font-weight: 800; font-size: 16px; display: flex; justify-content: center; align-items: center; gap: 8px; margin-top: 10px; }
+    
+    .toast { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%) translateY(20px); background-color: var(--cinta); color: var(--crema); padding: 10px 20px; border-radius: 30px; border: 1px solid var(--dorado); font-family: var(--font-datos); font-weight: 700; font-size: 14px; opacity: 0; pointer-events: none; transition: 0.3s; z-index: 60; text-align: center; width: max-content; max-width: 90%; }
+    .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+    footer { background-color: var(--bordo-banda); color: var(--crema); border-top: 2px solid var(--dorado); padding: 30px 15px; text-align: center; margin-top: auto; }
+    footer .script { font-family: var(--font-script); font-size: 22px; color: var(--papel); margin-bottom: 10px; }
+    @media(min-width: 768px) { footer .script { font-size: 26px; } }
+    footer .info { font-family: var(--font-datos); font-size: 13px; margin-bottom: 5px; }
+    footer .copyright { font-size: 11px; opacity: 0.8; margin-top: 15px; }
+  </style>
+</head>
+<body>
+    <div class="top-bar">
+  <div class="container">
+    <div>📍 Bolivia 1176, Bahía Blanca • Lun a Sáb 9:00-13:30 y 17:00-21:30 | Dom 9:00-13:00</div>
+    <div>WhatsApp: <b>291 578-7712</b> | IG: <b>@polleria_vym</b></div>
+  </div>
+</div>
+
+<header>
+  <div class="cart-btn-container">
+    <button onclick="toggleCart(true)" class="cart-btn">
+      🛒 Mi Pedido <span id="cart-count" class="cart-count">0</span>
+    </button>
+  </div>
+  <div class="container brand">
+    <h1>Pollería <span>V&M</span></h1>
+    <p>“Fresco de verdad. Hecho por nosotras.”</p>
+    <div class="divider"><span></span><i>♥</i><span></span></div>
+  </div>
+</header>
+
+<main class="container">
+  <div class="filters">
+    <div class="search-box">
+      <input type="text" id="search-input" placeholder="Buscar milanesas, pollo, combos..." oninput="renderProducts()" />
+    </div>
+    <div class="categories" id="category-pills"></div>
+  </div>
+
+  <div class="section-title">
+    <h2>¡Hacé tu pedido!</h2>
+    <p>Sabores caseros, elaborados con dedicación cada día</p>
+  </div>
+
+  <div class="grid" id="products-grid"></div>
+</main>
+
+<div id="cart-backdrop" class="cart-backdrop" onclick="toggleCart(false)"></div>
+<div id="cart-drawer" class="cart-drawer">
+  <div class="cart-header">
+    <button onclick="toggleCart(false)">← Volver</button>
+    <span class="font-titulo" style="font-weight:700;">Tu Pedido</span>
+    <button onclick="clearCart()">Vaciar</button>
+  </div>
+  <div class="cart-body" id="cart-items-container"></div>
+  <div class="cart-footer">
+    <div class="cart-total">
+      <span>Total Estimado:</span>
+      <span id="cart-total">$0</span>
+    </div>
+    <p style="font-size:10px; color:var(--oliva); font-style:italic; margin-bottom:10px;">* En productos frescos por peso, el importe final se confirma al pesar.</p>
+    
+    <div class="form-group">
+      <label>¿Cómo lo retirás?</label>
+      <select id="delivery-method" onchange="handleDeliveryChange()">
+        <option value="Retiro por el local (Bolivia 1176)">Retiro por el local (Bolivia 1176)</option>
+        <option value="Envío a domicilio en Bahía Blanca">Envío a domicilio en Bahía Blanca</option>
+      </select>
+    </div>
+    <div class="form-group" id="buyer-address-box" style="display:none;">
+      <label>Dirección de entrega *</label>
+      <input type="text" id="buyer-address" placeholder="Calle, altura, timbre" />
+    </div>
+    <div class="form-group">
+      <label>Tu Nombre *</label>
+      <input type="text" id="buyer-name" placeholder="Ej: Laura" />
+    </div>
+    <div class="form-group">
+      <label>Forma de Pago</label>
+      <select id="buyer-payment">
+        <option value="Efectivo">Efectivo</option>
+        <option value="Transferencia / Mercado Pago">Transferencia / Mercado Pago</option>
+        <option value="Tarjeta">Tarjeta de Débito / Crédito</option>
+      </select>
+    </div>
+    
+    <button onclick="sendOrderWhatsApp()" class="btn-wa">
+      📲 ENVIAR PEDIDO POR WHATSAPP
+    </button>
+  </div>
+</div>
+
+<div id="toast" class="toast">Sumado a tu pedido ✓</div>
+
+<footer>
+  <div class="script">Hecho con amor por Vero y More</div>
+  <div class="info">📱 WhatsApp: <b>291 578-7712</b></div>
+  <div class="info">📍 Bolivia 1176, Bahía Blanca (CP 8000)</div>
+  <div class="info">📸 Instagram: <b>@polleria_vym</b></div>
+  <div class="copyright">Pollería V&M — Fresco de verdad. Hecho por nosotras.</div>
+</footer>
+  <script>
+    const WHATSAPP = "5492915787712";
+    const CART_KEY = "polleria_vym_cart_v2";
+
+    const PRODUCTS = [
+      { id: "CMB-01", categoria: "Combos", nombre: "Combo 1 — Familiar Clásico", sello: "Ideal para compartir", desc: "2 Kg de pata muslo fresca, 1 Kg de milanesas, 1 docena de albóndigas y 1 bandeja de hamburguesas.", presentaciones: [{ etiqueta: "Combo Completo", precio: 21000 }], img: "https://images.unsplash.com/photo-1604503468506-a8da13d82791?auto=format&fit=crop&w=600&q=80" },
+      { id: "CMB-02", categoria: "Combos", nombre: "Combo 2 — Especial Milanesas", sello: "Más pedido", desc: "2 Kg de milanesas de pollo, 1 Kg de milanesas rellenas (jamón y queso) y 500 gr de patitas crocantes.", presentaciones: [{ etiqueta: "Combo Completo", precio: 23500 }], img: "https://images.unsplash.com/photo-1562967914-608f82629710?auto=format&fit=crop&w=600&q=80" },
+      { id: "CMB-03", categoria: "Combos", nombre: "Combo 3 — Domingo al Spiedo", sello: "Pollo al spiedo", desc: "1 Pollo entero al spiedo, 1 porción grande de papas fritas y 1 porción de ensalada rusa.", presentaciones: [{ etiqueta: "Combo Completo", precio: 24000 }], img: "https://images.unsplash.com/photo-1598103442097-8b74394b95c6?auto=format&fit=crop&w=600&q=80" },
+      { id: "CMB-04", categoria: "Combos", nombre: "Combo 4 — Especialidades", sello: "Variedad", desc: "1 arrollado de 1kg, 1 mila rellena, 1kg de hamburguesas y 1kg de albóndigas.", presentaciones: [{ etiqueta: "Combo Completo", precio: 37500 }], img: "https://images.unsplash.com/photo-1604908176997-125f25cc6f3d?auto=format&fit=crop&w=600&q=80" },
+      { id: "CMB-05", categoria: "Combos", nombre: "Combo 5 — Milanesas al por Mayor", sello: "Venta Mayorista", desc: "Cajón / pack mayorista a partir de 10 Kg. Ideal comercios, rotiserías y eventos.", presentaciones: [{ etiqueta: "Consultar", precio: 0 }], cotizar: true, img: "https://images.unsplash.com/photo-1632778149955-e80f8ceca2e8?auto=format&fit=crop&w=600&q=80" },
+      { id: "MIL-01", categoria: "Milanesas", nombre: "Milanesas Rellenas de Jamón y Queso", sello: "Especialidad", desc: "Pechuga abierta rellena con jamón cocido y mozzarella. Condimentadas con ajo y perejil.", presentaciones: [{ etiqueta: "1 Kg", precio: 11800 }, { etiqueta: "1/2 Kg", precio: 6200 }], img: "https://images.unsplash.com/photo-1585325701956-60dd9c8553bc?auto=format&fit=crop&w=600&q=80" },
+      { id: "MIL-02", categoria: "Milanesas", nombre: "Milanesas de Pechuga Caseras", sello: "Hechas en el día", desc: "Suprema limpia sin nervios, pasadas por huevo fresco y pan rallado seleccionado.", presentaciones: [{ etiqueta: "1 Kg", precio: 9600 }, { etiqueta: "1/2 Kg", precio: 5000 }], img: "https://images.unsplash.com/photo-1562967914-608f82629710?auto=format&fit=crop&w=600&q=80" },
+      { id: "ELA-01", categoria: "Elaborados", nombre: "Arrollado de Pollo Artesanal", sello: "Hecho por nosotras", desc: "Relleno con jamón, queso, morrón asado, huevo y aceitunas. Atado a mano.", presentaciones: [{ etiqueta: "Por Kg", precio: 13500 }, { etiqueta: "Pieza entera (~1.5 Kg)", precio: 19800 }], img: "https://images.unsplash.com/photo-1604908176997-125f25cc6f3d?auto=format&fit=crop&w=600&q=80" },
+      { id: "SPI-01", categoria: "Pollo al Spiedo", nombre: "Pollo al Spiedo Dorado", sello: "Pollo al spiedo", desc: "Cocción lenta con adobo casero de limón y especias. Piel crocante y carne jugosa.", presentaciones: [{ etiqueta: "Pollo Entero", precio: 17500 }, { etiqueta: "1/2 Pollo", precio: 9500 }], img: "https://images.unsplash.com/photo-1598103442097-8b74394b95c6?auto=format&fit=crop&w=600&q=80" }
+    ];
+
+    let products = [...PRODUCTS];
+    let activeCategory = "Todos";
+    let cart = [];
+    let selectedPresIdx = {};
+
+    function formatPrice(n) { return n === 0 ? "A cotizar" : "$" + n.toLocaleString("es-AR"); }
+
+    function init() {
+      loadCart();
+      renderCategories();
+      renderProducts();
+    }
+
+    function renderCategories() {
+      const cats = ["Todos", ...new Set(products.map(p => p.categoria))];
+      const cont = document.getElementById("category-pills");
+      cont.innerHTML = cats.map(c => `
+        <button class="cat-pill ${c === activeCategory ? 'active' : ''}" onclick="setCategory('${c}')">${c}</button>
+      `).join("");
+    }
+
+    function setCategory(c) {
+      activeCategory = c;
+      renderCategories();
+      renderProducts();
+    }
+
+    function renderProducts() {
+      const q = document.getElementById("search-input").value.toLowerCase();
+      const grid = document.getElementById("products-grid");
+      
+      let filtered = products.filter(p => {
+        const matchCat = activeCategory === "Todos" || p.categoria === activeCategory;
+        const matchSearch = p.nombre.toLowerCase().includes(q) || p.desc.toLowerCase().includes(q);
+        return matchCat && matchSearch;
+      });
+
+      if (filtered.length === 0) {
+        grid.innerHTML = `<p style="grid-column: 1/-1; text-align:center; font-style:italic; color:var(--oliva);">No se encontraron productos.</p>`;
+        return;
+      }
+
+      grid.innerHTML = filtered.map(p => {
+        const idx = selectedPresIdx[p.id] || 0;
+        const pres = p.presentaciones[idx];
+        const isQuote = p.cotizar;
+        
+        return `
+          <div class="card">
+            <img src="${p.img}" alt="${p.nombre}" class="card-img" loading="lazy" />
+            <div class="card-content">
+              <div style="display:flex; justify-content:space-between; align-items:center;">
+                <span class="card-category">${p.categoria}</span>
+                ${p.sello ? `<span style="font-size:10px; background:var(--bordo-banda); color:var(--crema); padding:2px 6px; border-radius:10px;">${p.sello}</span>` : ''}
+              </div>
+              <h3 class="card-title">${p.nombre}</h3>
+              <p class="card-desc">${p.desc}</p>
+              
+              ${p.presentaciones.length > 1 ? `
+                <select onchange="selectedPresIdx['${p.id}']=+this.value; renderProducts()" style="padding:8px; border-radius:5px; border:1px solid var(--dorado); background:var(--arena); font-family:var(--font-datos); font-size:13px; margin-bottom:5px;">
+                  ${p.presentaciones.map((pr, i) => `<option value="${i}" ${i===idx?'selected':''}>${pr.etiqueta} - ${formatPrice(pr.precio)}</option>`).join('')}
+                </select>
+              ` : `<div class="card-price">${formatPrice(pres.precio)}</div>`}
+
+              <button onclick="addToCart('${p.id}', ${idx})" class="card-btn ${isQuote ? 'quote' : ''}">
+                ${isQuote ? '📲 Consultar por WhatsApp' : '＋ Sumar al pedido'}
+              </button>
+            </div>
+          </div>
+        `;
+      }).join("");
+    }
+
+    function showToast(msg) {
+      const t = document.getElementById("toast");
+      t.textContent = msg;
+      t.classList.add("show");
+      setTimeout(() => t.classList.remove("show"), 2500);
+    }
+
+    function addToCart(id, idx) {
+      const p = products.find(x => x.id === id);
+      if (p.cotizar) {
+        const msg = `¡Hola Vero y More! Quería consultar por: *${p.nombre}* (${p.desc})`;
+        window.open(`https://wa.me/${WHATSAPP}?text=${encodeURIComponent(msg)}`, "_blank");
+        return;
+      }
+      const key = `${id}::${idx}`;
+      const existing = cart.find(i => i.key === key);
+      if (existing) { existing.qty++; }
+      else {
+        cart.push({ key, nombre: p.nombre, etiqueta: p.presentaciones[idx].etiqueta, precio: p.presentaciones[idx].precio, qty: 1 });
+      }
+      saveCart();
+      showToast("Sumado a tu pedido ✓");
+    }
+
+    function saveCart() {
+      localStorage.setItem(CART_KEY, JSON.stringify(cart));
+      updateCartUI();
+    }
+
+    function loadCart() {
+      try { cart = JSON.parse(localStorage.getItem(CART_KEY)) || []; } catch { cart = []; }
+      updateCartUI();
+    }
+
+    function updateCartUI() {
+      document.getElementById("cart-count").textContent = cart.reduce((s, i) => s + i.qty, 0);
+      const cont = document.getElementById("cart-items-container");
+      const totalEl = document.getElementById("cart-total");
+      
+      if (cart.length === 0) {
+        cont.innerHTML = `<p style="text-align:center; font-style:italic; color:var(--oliva); padding:20px 0;">Tu pedido está vacío.</p>`;
+        totalEl.textContent = "$0";
+        return;
+      }
+
+      cont.innerHTML = cart.map(i => `
+        <div class="cart-item">
+          <div class="cart-item-info">
+            <div class="cart-item-title">${i.nombre}</div>
+            <div class="cart-item-price">${i.etiqueta} — ${formatPrice(i.precio)}</div>
+          </div>
+          <div class="cart-item-actions">
+            <button onclick="changeQty('${i.key}', -1)">−</button>
+            <span>${i.qty}</span>
+            <button onclick="changeQty('${i.key}', 1)">+</button>
+          </div>
+        </div>
+      `).join("");
+
+      const total = cart.reduce((s, i) => s + i.precio * i.qty, 0);
+      totalEl.textContent = formatPrice(total);
+    }
+
+    function changeQty(key, d) {
+      const item = cart.find(i => i.key === key);
+      if (!item) return;
+      item.qty += d;
+      if (item.qty <= 0) cart = cart.filter(i => i.key !== key);
+      saveCart();
+    }
+
+    function clearCart() {
+      if (confirm("¿Vaciar el pedido?")) { cart = []; saveCart(); }
+    }
+
+    function toggleCart(open) {
+      document.getElementById("cart-drawer").classList.toggle("open", open);
+      document.getElementById("cart-backdrop").classList.toggle("show", open);
+    }
+
+    function handleDeliveryChange() {
+      const isDelivery = document.getElementById("delivery-method").value.includes("Envío");
+      document.getElementById("buyer-address-box").style.display = isDelivery ? "block" : "none";
+    }
+
+    function sendOrderWhatsApp() {
+      if (cart.length === 0) return alert("Tu pedido está vacío.");
+      
+      const name = document.getElementById("buyer-name").value.trim();
+      const method = document.getElementById("delivery-method").value;
+      const address = document.getElementById("buyer-address").value.trim();
+      const payment = document.getElementById("buyer-payment").value;
+
+      if (!name) return alert("Por favor, ingresá tu nombre.");
+      if (method.includes("Envío") && !address) return alert("Ingresá la dirección de entrega.");
+
+      const lines = cart.map(i => `• ${i.qty}x ${i.nombre} (${i.etiqueta}) — ${formatPrice(i.precio * i.qty)}`);
+      const total = cart.reduce((s, i) => s + i.precio * i.qty, 0);
+      
+      const msg = `¡Hola! Quiero hacer este pedido:\n\n${lines.join("\n")}\n\n*Total:* ${formatPrice(total)}\n\n*Nombre:* ${name}\n*Entrega:* ${method}${method.includes("Envío") ? `\n*Dirección:* ${address}` : ""}\n*Pago:* ${payment}\n\n(El total se confirma al pesar los productos frescos.)`;
+      
+      window.open(`https://wa.me/${WHATSAPP}?text=${encodeURIComponent(msg)}`, "_blank");
+    }
+
+    init();
+  </script>
+</body>
+</html>
