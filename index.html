@@ -38,35 +38,35 @@
     .font-subtitulo { font-family: var(--font-subtitulo); }
     .font-datos { font-family: var(--font-datos); }
     .font-script { font-family: var(--font-script); }
-    .bg-bordo { background-color: var(--bordo); }
-    .bg-bordo-banda { background-color: var(--bordo-banda); }
     .text-crema { color: var(--crema); }
     .text-bordo { color: var(--bordo); }
     .text-oliva { color: var(--oliva); }
     .text-rojo { color: var(--rojo); }
     .text-dorado { color: var(--dorado); }
 
+    /* Banda superior */
     .top-bar { background-color: var(--bordo-banda); color: var(--crema); font-family: var(--font-datos); font-size: 11px; padding: 8px 10px; border-bottom: 1px solid rgba(130,106,59,0.4); text-align: center; }
-    .top-bar .container { display: flex; flex-direction: column; align-items: center; gap: 4px; }
+    .top-bar .container { display: flex; flex-direction: column; align-items: center; gap: 6px; }
     @media(min-width: 768px) { 
       .top-bar .container { flex-direction: row; justify-content: space-between; font-size: 13px; } 
     }
+    .top-bar a { transition: opacity 0.2s; }
+    .top-bar a:hover { opacity: 0.8; text-decoration: underline; }
     
-    header { background-color: rgba(250, 240, 223, 0.95); border-bottom: 1px solid rgba(130,106,59,0.4); padding: 20px 15px; position: relative; }
+    /* Header y Logo */
+    header { background-color: rgba(250, 240, 223, 0.95); border-bottom: 1px solid rgba(130,106,59,0.4); padding: 15px; position: relative; }
     .brand { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 5px; margin-top: 10px; }
     @media(min-width: 768px) { .brand { margin-top: 0; } }
     
-    .brand h1 { font-family: var(--font-titulo); font-size: 22px; color: var(--bordo); text-transform: uppercase; font-weight: 800; letter-spacing: 1px; line-height: 1.1; }
-    @media(min-width: 768px) { .brand h1 { font-size: 32px; } }
-    .brand h1 span { color: var(--oliva); }
-    .brand p { font-family: var(--font-subtitulo); font-style: italic; font-size: 14px; color: var(--oliva); font-weight: 600; }
-    @media(min-width: 768px) { .brand p { font-size: 18px; } }
+    .brand-logo { max-width: 220px; width: 100%; height: auto; object-fit: contain; }
+    @media(min-width: 768px) { .brand-logo { max-width: 280px; } }
 
     .divider { display: flex; align-items: center; justify-content: center; gap: 10px; width: 150px; margin: 8px auto 0; }
     @media(min-width: 768px) { .divider { width: 250px; } }
     .divider span { height: 1px; flex: 1; background-color: rgba(130,106,59,0.6); }
     .divider i { color: var(--rojo); font-size: 12px; font-style: normal; }
 
+    /* Botón Carrito */
     .cart-btn-container { position: absolute; top: 10px; right: 10px; z-index: 10; }
     @media(min-width: 768px) { .cart-btn-container { top: 20px; right: 20px; } }
     .cart-btn { background-color: var(--bordo-banda); color: var(--crema); padding: 6px 10px; border-radius: 20px; font-family: var(--font-datos); font-weight: 700; font-size: 12px; display: flex; align-items: center; gap: 5px; border: 1px solid rgba(130,106,59,0.5); transition: 0.2s; }
@@ -74,6 +74,7 @@
     .cart-btn:hover { opacity: 0.9; }
     .cart-count { background-color: var(--rojo); color: var(--crema); padding: 2px 6px; border-radius: 10px; font-size: 10px; font-weight: 800; }
 
+    /* Filtros */
     .filters { margin: 20px 0; display: flex; flex-direction: column; gap: 15px; }
     @media(min-width: 768px) { .filters { flex-direction: row; align-items: center; justify-content: space-between; } }
     .search-box { position: relative; width: 100%; max-width: 100%; }
@@ -84,6 +85,7 @@
     .cat-pill { white-space: nowrap; padding: 8px 16px; border-radius: 20px; font-family: var(--font-datos); font-size: 13px; font-weight: 700; border: 1px solid rgba(130,106,59,0.6); background-color: var(--arena); color: var(--oliva); transition: 0.2s; }
     .cat-pill.active { background-color: var(--bordo-banda); color: var(--crema); border-color: var(--dorado); }
 
+    /* Grilla y Tarjetas */
     .section-title { text-align: center; margin: 10px 0 20px; }
     .section-title h2 { font-family: var(--font-titulo); font-size: 20px; color: var(--bordo); text-transform: uppercase; font-weight: 800; }
     @media(min-width: 768px) { .section-title h2 { font-size: 28px; } }
@@ -106,6 +108,7 @@
     .card-btn:hover { opacity: 0.9; }
     .card-btn.quote { background-color: var(--oliva); }
 
+    /* Carrito Lateral */
     .cart-backdrop { position: fixed; inset: 0; background: rgba(0,0,0,0.6); z-index: 40; display: none; }
     .cart-backdrop.show { display: block; }
     .cart-drawer { position: fixed; top: 0; right: 0; bottom: 0; width: 100%; max-width: 100%; background-color: var(--crema); border-left: 1px solid var(--dorado); z-index: 50; transform: translateX(100%); transition: transform 0.3s ease; display: flex; flex-direction: column; }
@@ -127,131 +130,257 @@
     .form-group input, .form-group select { width: 100%; padding: 10px; border-radius: 6px; border: 1px solid rgba(130,106,59,0.6); background-color: var(--arena); font-family: var(--font-lectura); font-size: 14px; }
     .btn-wa { width: 100%; background-color: #25D366; color: white; padding: 14px; border-radius: 10px; font-family: var(--font-datos); font-weight: 800; font-size: 16px; display: flex; justify-content: center; align-items: center; gap: 8px; margin-top: 10px; }
     
+    /* Toast y Footer */
     .toast { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%) translateY(20px); background-color: var(--cinta); color: var(--crema); padding: 10px 20px; border-radius: 30px; border: 1px solid var(--dorado); font-family: var(--font-datos); font-weight: 700; font-size: 14px; opacity: 0; pointer-events: none; transition: 0.3s; z-index: 60; text-align: center; width: max-content; max-width: 90%; }
     .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+    
     footer { background-color: var(--bordo-banda); color: var(--crema); border-top: 2px solid var(--dorado); padding: 30px 15px; text-align: center; margin-top: auto; }
     footer .script { font-family: var(--font-script); font-size: 22px; color: var(--papel); margin-bottom: 10px; }
     @media(min-width: 768px) { footer .script { font-size: 26px; } }
     footer .info { font-family: var(--font-datos); font-size: 13px; margin-bottom: 5px; }
     footer .copyright { font-size: 11px; opacity: 0.8; margin-top: 15px; }
+    
+    /* Botones sociales Footer */
+    .footer-btns { display: flex; flex-direction: column; align-items: center; gap: 8px; margin: 15px 0; }
+    @media(min-width: 600px) { .footer-btns { flex-direction: row; justify-content: center; gap: 15px; } }
+    .footer-btn { display: inline-flex; align-items: center; gap: 6px; background-color: rgba(250, 240, 223, 0.15); padding: 8px 16px; border-radius: 20px; border: 1px solid rgba(250, 240, 223, 0.3); font-family: var(--font-datos); font-size: 13px; font-weight: 600; transition: 0.2s; }
+    .footer-btn:hover { background-color: rgba(250, 240, 223, 0.25); }
   </style>
 </head>
 <body>
-    <div class="top-bar">
-  <div class="container">
-    <div>📍 Bolivia 1176, Bahía Blanca • Lun a Sáb 9:00-13:30 y 17:00-21:30 | Dom 9:00-13:00</div>
-    <div>WhatsApp: <b>291 578-7712</b> | IG: <b>@polleria_vym</b></div>
-  </div>
-</div>
 
-<header>
-  <div class="cart-btn-container">
-    <button onclick="toggleCart(true)" class="cart-btn">
-      🛒 Mi Pedido <span id="cart-count" class="cart-count">0</span>
-    </button>
-  </div>
-  <div class="container brand">
-    <h1>Pollería <span>V&M</span></h1>
-    <p>“Fresco de verdad. Hecho por nosotras.”</p>
-    <div class="divider"><span></span><i>♥</i><span></span></div>
-  </div>
-</header>
-
-<main class="container">
-  <div class="filters">
-    <div class="search-box">
-      <input type="text" id="search-input" placeholder="Buscar milanesas, pollo, combos..." oninput="renderProducts()" />
+  <!-- BANDA SUPERIOR -->
+  <div class="top-bar">
+    <div class="container">
+      <div>
+        <a href="https://www.google.com/maps/place/Poller%C3%ADa+V%26M/@-38.7202148,-62.2949954,17z/data=!3m1!4b1!4m6!3m5!1s0x95edbd76ce4eba17:0x1d5ae0e8be277033!8m2!3d-38.7202148!4d-62.2949954!16s%2Fg%2F11nvbgycfk?entry=ttu&g_ep=EgoyMDI2MTExNy4wIKXMDSoASAFQAw%3D%3D" target="_blank">
+          📍 Bolivia 1176, Bahía Blanca
+        </a> 
+        • Lun a Sáb 9:00-13:30 y 17:00-21:30 | Dom 9:00-13:00
+      </div>
+      <div>
+        <a href="https://wa.me/5492915787712" target="_blank">WhatsApp: <b>291 578-7712</b></a> | 
+        <a href="https://www.instagram.com/polleria_vym/" target="_blank">IG: <b>@polleria_vym</b></a>
+      </div>
     </div>
-    <div class="categories" id="category-pills"></div>
   </div>
 
-  <div class="section-title">
-    <h2>¡Hacé tu pedido!</h2>
-    <p>Sabores caseros, elaborados con dedicación cada día</p>
-  </div>
-
-  <div class="grid" id="products-grid"></div>
-</main>
-
-<div id="cart-backdrop" class="cart-backdrop" onclick="toggleCart(false)"></div>
-<div id="cart-drawer" class="cart-drawer">
-  <div class="cart-header">
-    <button onclick="toggleCart(false)">← Volver</button>
-    <span class="font-titulo" style="font-weight:700;">Tu Pedido</span>
-    <button onclick="clearCart()">Vaciar</button>
-  </div>
-  <div class="cart-body" id="cart-items-container"></div>
-  <div class="cart-footer">
-    <div class="cart-total">
-      <span>Total Estimado:</span>
-      <span id="cart-total">$0</span>
+  <!-- HEADER CON LOGO -->
+  <header>
+    <div class="cart-btn-container">
+      <button onclick="toggleCart(true)" class="cart-btn">
+        🛒 Mi Pedido <span id="cart-count" class="cart-count">0</span>
+      </button>
     </div>
-    <p style="font-size:10px; color:var(--oliva); font-style:italic; margin-bottom:10px;">* En productos frescos por peso, el importe final se confirma al pesar.</p>
+    <div class="container brand">
+      <!-- Aquí va el logo oficial -->
+      <img src="logo.png" alt="Pollería V&M Logo" class="brand-logo" />
+      <div class="divider"><span></span><i>♥</i><span></span></div>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="filters">
+      <div class="search-box">
+        <input type="text" id="search-input" placeholder="Buscar milanesas, pollo, combos..." oninput="renderProducts()" />
+      </div>
+      <div class="categories" id="category-pills"></div>
+    </div>
+
+    <div class="section-title">
+      <h2>¡Hacé tu pedido!</h2>
+      <p>Sabores caseros, elaborados con dedicación cada día</p>
+    </div>
+
+    <div class="grid" id="products-grid"></div>
+  </main>
+
+  <!-- CARRITO LATERAL -->
+  <div id="cart-backdrop" class="cart-backdrop" onclick="toggleCart(false)"></div>
+  <div id="cart-drawer" class="cart-drawer">
+    <div class="cart-header">
+      <button onclick="toggleCart(false)">← Volver</button>
+      <span class="font-titulo" style="font-weight:700;">Tu Pedido</span>
+      <button onclick="clearCart()">Vaciar</button>
+    </div>
+    <div class="cart-body" id="cart-items-container"></div>
+    <div class="cart-footer">
+      <div class="cart-total">
+        <span>Total Estimado:</span>
+        <span id="cart-total">$0</span>
+      </div>
+      <p style="font-size:10px; color:var(--oliva); font-style:italic; margin-bottom:10px;">* En productos frescos por peso, el importe final se confirma al pesar.</p>
+      
+      <div class="form-group">
+        <label>¿Cómo lo retirás?</label>
+        <select id="delivery-method" onchange="handleDeliveryChange()">
+          <option value="Retiro por el local (Bolivia 1176)">Retiro por el local (Bolivia 1176)</option>
+          <option value="Envío a domicilio en Bahía Blanca">Envío a domicilio en Bahía Blanca</option>
+        </select>
+      </div>
+      <div class="form-group" id="buyer-address-box" style="display:none;">
+        <label>Dirección de entrega *</label>
+        <input type="text" id="buyer-address" placeholder="Calle, altura, timbre" />
+      </div>
+      <div class="form-group">
+        <label>Tu Nombre *</label>
+        <input type="text" id="buyer-name" placeholder="Ej: Laura" />
+      </div>
+      <div class="form-group">
+        <label>Forma de Pago</label>
+        <select id="buyer-payment">
+          <option value="Efectivo">Efectivo</option>
+          <option value="Transferencia / Mercado Pago">Transferencia / Mercado Pago</option>
+          <option value="Tarjeta">Tarjeta de Débito / Crédito</option>
+        </select>
+      </div>
+      
+      <button onclick="sendOrderWhatsApp()" class="btn-wa">
+        📲 ENVIAR PEDIDO POR WHATSAPP
+      </button>
+    </div>
+  </div>
+
+  <div id="toast" class="toast">Sumado a tu pedido ✓</div>
+
+  <!-- FOOTER CON BOTONES SOCIALES -->
+  <footer>
+    <div class="script">Hecho con amor por Vero y More</div>
     
-    <div class="form-group">
-      <label>¿Cómo lo retirás?</label>
-      <select id="delivery-method" onchange="handleDeliveryChange()">
-        <option value="Retiro por el local (Bolivia 1176)">Retiro por el local (Bolivia 1176)</option>
-        <option value="Envío a domicilio en Bahía Blanca">Envío a domicilio en Bahía Blanca</option>
-      </select>
+    <div class="footer-btns">
+      <a href="https://wa.me/5492915787712" target="_blank" class="footer-btn">
+        📱 WhatsApp: 291 578-7712
+      </a>
+      <a href="https://www.google.com/maps/place/Poller%C3%ADa+V%26M/@-38.7202148,-62.2949954,17z/data=!3m1!4b1!4m6!3m5!1s0x95edbd76ce4eba17:0x1d5ae0e8be277033!8m2!3d-38.7202148!4d-62.2949954!16s%2Fg%2F11nvbgycfk?entry=ttu&g_ep=EgoyMDI2MTExNy4wIKXMDSoASAFQAw%3D%3D" target="_blank" class="footer-btn">
+        📍 Cómo llegar (Maps)
+      </a>
+      <a href="https://www.instagram.com/polleria_vym/" target="_blank" class="footer-btn">
+        📸 Instagram: @polleria_vym
+      </a>
     </div>
-    <div class="form-group" id="buyer-address-box" style="display:none;">
-      <label>Dirección de entrega *</label>
-      <input type="text" id="buyer-address" placeholder="Calle, altura, timbre" />
-    </div>
-    <div class="form-group">
-      <label>Tu Nombre *</label>
-      <input type="text" id="buyer-name" placeholder="Ej: Laura" />
-    </div>
-    <div class="form-group">
-      <label>Forma de Pago</label>
-      <select id="buyer-payment">
-        <option value="Efectivo">Efectivo</option>
-        <option value="Transferencia / Mercado Pago">Transferencia / Mercado Pago</option>
-        <option value="Tarjeta">Tarjeta de Débito / Crédito</option>
-      </select>
-    </div>
-    
-    <button onclick="sendOrderWhatsApp()" class="btn-wa">
-      📲 ENVIAR PEDIDO POR WHATSAPP
-    </button>
-  </div>
-</div>
 
-<div id="toast" class="toast">Sumado a tu pedido ✓</div>
+    <div class="info">Horarios: Lun a Sáb 9:00-13:30 y 17:00-21:30 | Dom 9:00-13:00</div>
+    <div class="copyright">Pollería V&M — Fresco de verdad. Hecho por nosotras.</div>
+  </footer>
 
-<footer>
-  <div class="script">Hecho con amor por Vero y More</div>
-  <div class="info">📱 WhatsApp: <b>291 578-7712</b></div>
-  <div class="info">📍 Bolivia 1176, Bahía Blanca (CP 8000)</div>
-  <div class="info">📸 Instagram: <b>@polleria_vym</b></div>
-  <div class="copyright">Pollería V&M — Fresco de verdad. Hecho por nosotras.</div>
-</footer>
   <script>
-    const WHATSAPP = "5492915787712";
+    // ==========================================
+    // 1. CONFIGURACIÓN DE GOOGLE SHEETS
+    // ==========================================
+    // PEGAR AQUÍ LOS ENLACES CSV (terminan en &output=csv)
+    const URL_CSV_PRODUCTOS = "https://docs.google.com/spreadsheets/d/e/2PACX-1vT9UeIS0E1PvDiZgomEL4cTk6wWyoUFfuCLadjzuRhw_YwhDIJXU7plCsM4Ef8iafpL_uDZoVoiXR7f/pub?gid=0&single=true&output=csv";
+    const URL_CSV_CONFIG = "https://docs.google.com/spreadsheets/d/e/2PACX-1vT9UeIS0E1PvDiZgomEL4cTk6wWyoUFfuCLadjzuRhw_YwhDIJXU7plCsM4Ef8iafpL_uDZoVoiXR7f/pub?gid=1781789584&single=true&output=csv";
+    
+    let WHATSAPP = "5492915787712";
     const CART_KEY = "polleria_vym_cart_v2";
 
-    const PRODUCTS = [
-      { id: "CMB-01", categoria: "Combos", nombre: "Combo 1 — Familiar Clásico", sello: "Ideal para compartir", desc: "2 Kg de pata muslo fresca, 1 Kg de milanesas, 1 docena de albóndigas y 1 bandeja de hamburguesas.", presentaciones: [{ etiqueta: "Combo Completo", precio: 21000 }], img: "https://images.unsplash.com/photo-1604503468506-a8da13d82791?auto=format&fit=crop&w=600&q=80" },
-      { id: "CMB-02", categoria: "Combos", nombre: "Combo 2 — Especial Milanesas", sello: "Más pedido", desc: "2 Kg de milanesas de pollo, 1 Kg de milanesas rellenas (jamón y queso) y 500 gr de patitas crocantes.", presentaciones: [{ etiqueta: "Combo Completo", precio: 23500 }], img: "https://images.unsplash.com/photo-1562967914-608f82629710?auto=format&fit=crop&w=600&q=80" },
-      { id: "CMB-03", categoria: "Combos", nombre: "Combo 3 — Domingo al Spiedo", sello: "Pollo al spiedo", desc: "1 Pollo entero al spiedo, 1 porción grande de papas fritas y 1 porción de ensalada rusa.", presentaciones: [{ etiqueta: "Combo Completo", precio: 24000 }], img: "https://images.unsplash.com/photo-1598103442097-8b74394b95c6?auto=format&fit=crop&w=600&q=80" },
-      { id: "CMB-04", categoria: "Combos", nombre: "Combo 4 — Especialidades", sello: "Variedad", desc: "1 arrollado de 1kg, 1 mila rellena, 1kg de hamburguesas y 1kg de albóndigas.", presentaciones: [{ etiqueta: "Combo Completo", precio: 37500 }], img: "https://images.unsplash.com/photo-1604908176997-125f25cc6f3d?auto=format&fit=crop&w=600&q=80" },
-      { id: "CMB-05", categoria: "Combos", nombre: "Combo 5 — Milanesas al por Mayor", sello: "Venta Mayorista", desc: "Cajón / pack mayorista a partir de 10 Kg. Ideal comercios, rotiserías y eventos.", presentaciones: [{ etiqueta: "Consultar", precio: 0 }], cotizar: true, img: "https://images.unsplash.com/photo-1632778149955-e80f8ceca2e8?auto=format&fit=crop&w=600&q=80" },
-      { id: "MIL-01", categoria: "Milanesas", nombre: "Milanesas Rellenas de Jamón y Queso", sello: "Especialidad", desc: "Pechuga abierta rellena con jamón cocido y mozzarella. Condimentadas con ajo y perejil.", presentaciones: [{ etiqueta: "1 Kg", precio: 11800 }, { etiqueta: "1/2 Kg", precio: 6200 }], img: "https://images.unsplash.com/photo-1585325701956-60dd9c8553bc?auto=format&fit=crop&w=600&q=80" },
-      { id: "MIL-02", categoria: "Milanesas", nombre: "Milanesas de Pechuga Caseras", sello: "Hechas en el día", desc: "Suprema limpia sin nervios, pasadas por huevo fresco y pan rallado seleccionado.", presentaciones: [{ etiqueta: "1 Kg", precio: 9600 }, { etiqueta: "1/2 Kg", precio: 5000 }], img: "https://images.unsplash.com/photo-1562967914-608f82629710?auto=format&fit=crop&w=600&q=80" },
-      { id: "ELA-01", categoria: "Elaborados", nombre: "Arrollado de Pollo Artesanal", sello: "Hecho por nosotras", desc: "Relleno con jamón, queso, morrón asado, huevo y aceitunas. Atado a mano.", presentaciones: [{ etiqueta: "Por Kg", precio: 13500 }, { etiqueta: "Pieza entera (~1.5 Kg)", precio: 19800 }], img: "https://images.unsplash.com/photo-1604908176997-125f25cc6f3d?auto=format&fit=crop&w=600&q=80" },
-      { id: "SPI-01", categoria: "Pollo al Spiedo", nombre: "Pollo al Spiedo Dorado", sello: "Pollo al spiedo", desc: "Cocción lenta con adobo casero de limón y especias. Piel crocante y carne jugosa.", presentaciones: [{ etiqueta: "Pollo Entero", precio: 17500 }, { etiqueta: "1/2 Pollo", precio: 9500 }], img: "https://images.unsplash.com/photo-1598103442097-8b74394b95c6?auto=format&fit=crop&w=600&q=80" }
-    ];
-
-    let products = [...PRODUCTS];
+    let products = [];
     let activeCategory = "Todos";
     let cart = [];
     let selectedPresIdx = {};
 
+    // ==========================================
+    // 2. FUNCIONES DE LECTURA DE DATOS (CSV)
+    // ==========================================
+    function parseCSV(text) {
+      const rows = [];
+      let row = [], field = "", inQuotes = false;
+      for (let i = 0; i < text.length; i++) {
+        const c = text[i], next = text[i + 1];
+        if (inQuotes) {
+          if (c === '"' && next === '"') { field += '"'; i++; }
+          else if (c === '"') { inQuotes = false; }
+          else { field += c; }
+        } else {
+          if (c === '"') inQuotes = true;
+          else if (c === ',') { row.push(field); field = ""; }
+          else if (c === '\n') { row.push(field); rows.push(row); row = []; field = ""; }
+          else if (c === '\r') { /* ignorar */ }
+          else { field += c; }
+        }
+      }
+      if (field.length || row.length) { row.push(field); rows.push(row); }
+      return rows.filter(r => r.some(c => c.trim() !== ""));
+    }
+
+    async function loadDataFromSheets() {
+      try {
+        if (URL_CSV_CONFIG && URL_CSV_CONFIG.startsWith("http")) {
+          const resConfig = await fetch(URL_CSV_CONFIG);
+          const rowsConfig = parseCSV(await resConfig.text());
+          rowsConfig.forEach(r => {
+            if (r[0] && r[0].trim().toLowerCase().includes("whatsapp oficial")) {
+              WHATSAPP = r[1].trim();
+            }
+          });
+        }
+
+        if (URL_CSV_PRODUCTOS && URL_CSV_PRODUCTOS.startsWith("http")) {
+          const resProd = await fetch(URL_CSV_PRODUCTOS);
+          const rowsProd = parseCSV(await resProd.text());
+          if (rowsProd.length < 2) return;
+          
+          const headers = rowsProd[0].map(h => h.trim().toLowerCase());
+          const col = n => headers.indexOf(n);
+          
+          const parsedProducts = rowsProd.slice(1).map(r => {
+            const preciosStr = r[col("presentaciones_y_precios")] || "";
+            let presentaciones = [];
+            let cotizar = false;
+            
+            if (preciosStr.toUpperCase().includes("COTIZAR")) {
+              cotizar = true;
+              presentaciones = [{ etiqueta: "Consultar", precio: 0 }];
+            } else {
+              presentaciones = preciosStr.split("|").map(s => {
+                const parts = s.split(":");
+                if (parts.length >= 2) {
+                  return { etiqueta: parts[0].trim(), precio: parseFloat(parts[1]) || 0 };
+                }
+                return null;
+              }).filter(p => p !== null);
+            }
+
+            if (presentaciones.length === 0) {
+              presentaciones = [{ etiqueta: "Consultar", precio: 0 }];
+            }
+
+            return {
+              id: r[col("id")],
+              categoria: r[col("categoria")],
+              nombre: r[col("nombre")],
+              sello: r[col("sello_circular")],
+              desc: r[col("descripcion")],
+              presentaciones: presentaciones,
+              cotizar: cotizar,
+              img: r[col("foto_url")]
+            };
+          }).filter(p => p.id && p.nombre && p.categoria);
+
+          products = parsedProducts.filter((p, index) => {
+            const visibleIdx = col("visible");
+            if (visibleIdx !== -1 && rowsProd[index + 1][visibleIdx]) {
+              return rowsProd[index + 1][visibleIdx].trim().toUpperCase() === "SI";
+            }
+            return true;
+          });
+        }
+      } catch (error) {
+        console.error("Error cargando Google Sheets.", error);
+      }
+    }
+
+    // ==========================================
+    // 3. LÓGICA DE LA PÁGINA
+    // ==========================================
     function formatPrice(n) { return n === 0 ? "A cotizar" : "$" + n.toLocaleString("es-AR"); }
 
-    function init() {
+    async function init() {
       loadCart();
+      document.getElementById("products-grid").innerHTML = `<p style="grid-column: 1/-1; text-align:center; font-style:italic; color:var(--oliva);">Cargando catálogo...</p>`;
+      
+      await loadDataFromSheets();
+      
       renderCategories();
       renderProducts();
     }
@@ -276,7 +405,7 @@
       
       let filtered = products.filter(p => {
         const matchCat = activeCategory === "Todos" || p.categoria === activeCategory;
-        const matchSearch = p.nombre.toLowerCase().includes(q) || p.desc.toLowerCase().includes(q);
+        const matchSearch = p.nombre.toLowerCase().includes(q) || (p.desc && p.desc.toLowerCase().includes(q));
         return matchCat && matchSearch;
       });
 
@@ -292,14 +421,14 @@
         
         return `
           <div class="card">
-            <img src="${p.img}" alt="${p.nombre}" class="card-img" loading="lazy" />
+            <img src="${p.img || 'https://via.placeholder.com/400x300?text=Sin+Foto'}" alt="${p.nombre}" class="card-img" loading="lazy" />
             <div class="card-content">
               <div style="display:flex; justify-content:space-between; align-items:center;">
                 <span class="card-category">${p.categoria}</span>
                 ${p.sello ? `<span style="font-size:10px; background:var(--bordo-banda); color:var(--crema); padding:2px 6px; border-radius:10px;">${p.sello}</span>` : ''}
               </div>
               <h3 class="card-title">${p.nombre}</h3>
-              <p class="card-desc">${p.desc}</p>
+              <p class="card-desc">${p.desc || ''}</p>
               
               ${p.presentaciones.length > 1 ? `
                 <select onchange="selectedPresIdx['${p.id}']=+this.value; renderProducts()" style="padding:8px; border-radius:5px; border:1px solid var(--dorado); background:var(--arena); font-family:var(--font-datos); font-size:13px; margin-bottom:5px;">
@@ -326,7 +455,7 @@
     function addToCart(id, idx) {
       const p = products.find(x => x.id === id);
       if (p.cotizar) {
-        const msg = `¡Hola Vero y More! Quería consultar por: *${p.nombre}* (${p.desc})`;
+        const msg = `¡Hola Vero y More! Quería consultar por: *${p.nombre}* (${p.desc || ''})`;
         window.open(`https://wa.me/${WHATSAPP}?text=${encodeURIComponent(msg)}`, "_blank");
         return;
       }
