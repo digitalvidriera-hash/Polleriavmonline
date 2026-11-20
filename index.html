@@ -80,7 +80,8 @@
     .search-box { position: relative; width: 100%; max-width: 100%; }
     @media(min-width: 768px) { .search-box { max-width: 400px; } }
     .search-box input { width: 100%; padding: 12px 15px; border-radius: 10px; border: 1px solid rgba(130,106,59,0.6); background-color: rgba(242,226,200,0.8); font-family: var(--font-lectura); font-size: 14px; outline: none; }
-    .categories { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 5px; -webkit-overflow-scrolling: touch; }
+    
+    .categories { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 5px; -webkit-overflow-scrolling: touch; align-items: center; }
     .categories::-webkit-scrollbar { display: none; }
     .cat-pill { white-space: nowrap; padding: 8px 16px; border-radius: 20px; font-family: var(--font-datos); font-size: 13px; font-weight: 700; border: 1px solid rgba(130,106,59,0.6); background-color: var(--arena); color: var(--oliva); transition: 0.2s; }
     .cat-pill.active { background-color: var(--bordo-banda); color: var(--crema); border-color: var(--dorado); }
@@ -96,8 +97,12 @@
     @media(min-width: 900px) { .grid { grid-template-columns: repeat(3, 1fr); } }
 
     .card { background-color: var(--papel); border: 1px solid rgba(130,106,59,0.5); border-radius: 16px; overflow: hidden; display: flex; flex-direction: column; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
-    .card-img { width: 100%; height: 180px; object-fit: cover; background-color: var(--arena); }
-    @media(min-width: 768px) { .card-img { height: 220px; } }
+    
+    /* Contenedor de imagen de la tarjeta */
+    .card-img-container { width: 100%; height: 180px; background-color: var(--crema); display: flex; justify-content: center; align-items: center; padding: 15px; border-bottom: 1px dashed rgba(130,106,59,0.3); }
+    @media(min-width: 768px) { .card-img-container { height: 200px; } }
+    .card-img { width: 100%; height: 100%; object-fit: contain; } /* Contain para que los dibujos no se recorten */
+    
     .card-content { padding: 15px; display: flex; flex-direction: column; flex: 1; gap: 8px; }
     .card-category { font-family: var(--font-datos); font-size: 10px; text-transform: uppercase; color: var(--dorado); letter-spacing: 1px; font-weight: 700; }
     .card-title { font-family: var(--font-titulo); font-size: 16px; color: var(--bordo); font-weight: 700; line-height: 1.2; }
@@ -173,7 +178,7 @@
       </button>
     </div>
     <div class="container brand">
-      <!-- Aquí va el logo oficial -->
+      <!-- Logo oficial -->
       <img src="logo.png" alt="Pollería V&M Logo" class="brand-logo" />
       <div class="divider"><span></span><i>♥</i><span></span></div>
     </div>
@@ -265,14 +270,16 @@
 
   <script>
     // ==========================================
-    // 1. CONFIGURACIÓN DE GOOGLE SHEETS
+    // 1. CONFIGURACIÓN
     // ==========================================
-    // PEGAR AQUÍ LOS ENLACES CSV (terminan en &output=csv)
     const URL_CSV_PRODUCTOS = "https://docs.google.com/spreadsheets/d/e/2PACX-1vT9UeIS0E1PvDiZgomEL4cTk6wWyoUFfuCLadjzuRhw_YwhDIJXU7plCsM4Ef8iafpL_uDZoVoiXR7f/pub?gid=0&single=true&output=csv";
     const URL_CSV_CONFIG = "https://docs.google.com/spreadsheets/d/e/2PACX-1vT9UeIS0E1PvDiZgomEL4cTk6wWyoUFfuCLadjzuRhw_YwhDIJXU7plCsM4Ef8iafpL_uDZoVoiXR7f/pub?gid=1781789584&single=true&output=csv";
     
     let WHATSAPP = "5492915787712";
     const CART_KEY = "polleria_vym_cart_v2";
+
+    // Imagen por defecto si el producto no tiene foto en el Sheet
+    const DEFAULT_IMG = "https://via.placeholder.com/400x300?text=Sin+Foto";
 
     let products = [];
     let activeCategory = "Todos";
@@ -353,7 +360,8 @@
               desc: r[col("descripcion")],
               presentaciones: presentaciones,
               cotizar: cotizar,
-              img: r[col("foto_url")]
+              // Si la celda de Foto_URL está vacía, guardamos null para usar la por defecto después
+              img: (r[col("foto_url")] || "").trim() || null
             };
           }).filter(p => p.id && p.nombre && p.categoria);
 
@@ -388,8 +396,11 @@
     function renderCategories() {
       const cats = ["Todos", ...new Set(products.map(p => p.categoria))];
       const cont = document.getElementById("category-pills");
+      
       cont.innerHTML = cats.map(c => `
-        <button class="cat-pill ${c === activeCategory ? 'active' : ''}" onclick="setCategory('${c}')">${c}</button>
+        <button class="cat-pill ${c === activeCategory ? 'active' : ''}" onclick="setCategory('${c}')">
+          ${c}
+        </button>
       `).join("");
     }
 
@@ -419,9 +430,14 @@
         const pres = p.presentaciones[idx];
         const isQuote = p.cotizar;
         
+        // Usa la imagen del Sheet o la por defecto
+        const finalImg = p.img || DEFAULT_IMG;
+
         return `
           <div class="card">
-            <img src="${p.img || 'https://via.placeholder.com/400x300?text=Sin+Foto'}" alt="${p.nombre}" class="card-img" loading="lazy" />
+            <div class="card-img-container">
+              <img src="${finalImg}" alt="${p.nombre}" class="card-img" loading="lazy" onerror="this.src='${DEFAULT_IMG}'" />
+            </div>
             <div class="card-content">
               <div style="display:flex; justify-content:space-between; align-items:center;">
                 <span class="card-category">${p.categoria}</span>
